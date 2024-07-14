@@ -6,21 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.cennetnadir.lumen.R
+import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.FragmentAddBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.UUID
 
 class AddFragment : Fragment() {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
 
-    private val addDeckViewModel: AddDeckViewModel by viewModels()
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
+        firestore = FirebaseFirestore.getInstance()
         return binding.root
     }
 
@@ -30,11 +35,26 @@ class AddFragment : Fragment() {
         binding.buttonCreateDeck.setOnClickListener {
             val deckName = binding.deckNameInput.text.toString().trim()
             if (deckName.isNotBlank()) {
-                addDeckViewModel.saveDeck(deckName)  // Save the new deck
+                createDeck(deckName)
             } else {
                 Toast.makeText(requireContext(), "Please enter a deck name.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun createDeck(deckName: String) {
+        val deckId = UUID.randomUUID().toString()
+        val deck = Deck(id = deckId, name = deckName)
+        firestore.collection("decks")
+            .document(deckId)
+            .set(deck)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Deck created", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.navigation_library)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error creating deck: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     override fun onDestroyView() {

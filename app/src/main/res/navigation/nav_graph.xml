@@ -32,7 +32,6 @@
             app:destination="@+id/navigation_library" />
     </fragment>
 
-
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.cennetnadir.lumen.feature.settings.SettingsFragment"
