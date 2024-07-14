@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Flashcard(
-    val id: String = "", // Default value for Firebase deserialization
+    val id: String = "",
     val question: String = "",
     val answer: String = ""
 ) : Parcelable

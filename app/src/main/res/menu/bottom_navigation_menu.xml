@@ -1,28 +1,23 @@
+<!-- res/menu/bottom_navigation_menu.xml -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home"
         android:title="Home" />
-
     <item
         android:id="@+id/navigation_browse"
         android:icon="@drawable/ic_browse"
         android:title="Browse" />
-
     <item
         android:id="@+id/navigation_add"
         android:icon="@drawable/ic_add"
         android:title="Add" />
-
     <item
         android:id="@+id/navigation_library"
         android:icon="@drawable/ic_library"
         android:title="Library" />
-
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_settings"
         android:title="Settings" />
 </menu>
-

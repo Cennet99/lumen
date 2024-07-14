@@ -2,14 +2,10 @@ package com.cennetnadir.lumen.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.cennetnadir.lumen.R
 import com.cennetnadir.lumen.databinding.ActivityMainBinding
-import com.cennetnadir.lumen.feature.add.AddFragment
-import com.cennetnadir.lumen.feature.browse.BrowseFragment
-import com.cennetnadir.lumen.feature.home.HomeFragment
-import com.cennetnadir.lumen.feature.library.LibraryFragment
-import com.cennetnadir.lumen.feature.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,25 +16,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Load the default fragment
-        loadFragment(HomeFragment())
-
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> loadFragment(HomeFragment())
-                R.id.navigation_browse -> loadFragment(BrowseFragment())
-                R.id.navigation_add -> loadFragment(AddFragment())
-                R.id.navigation_library -> loadFragment(LibraryFragment())
-                R.id.navigation_settings -> loadFragment(SettingsFragment())
-                else -> false
-            }
-        }
+        val navController = findNavController(R.id.nav_host_fragment)
+        binding.bottomNavigationView.setupWithNavController(navController)
     }
 
-    private fun loadFragment(fragment: Fragment): Boolean {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-        return true
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

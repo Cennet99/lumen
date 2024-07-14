@@ -12,6 +12,11 @@ android {
     namespace = "com.cennetnadir.lumen"
     compileSdk = 34
 
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.cennetnadir.lumen"
         minSdk = 33

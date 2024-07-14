@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.cennetnadir.lumen.R
 import com.cennetnadir.lumen.core.data.Deck
-import com.cennetnadir.lumen.databinding.FragmentAddBinding
+import com.cennetnadir.lumen.databinding.FragmentAddDeckBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.UUID
 
-class AddFragment : Fragment() {
+class AddDeckFragment : Fragment() {
 
-    private var _binding: FragmentAddBinding? = null
+    private var _binding: FragmentAddDeckBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var firestore: FirebaseFirestore
@@ -24,7 +24,7 @@ class AddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddBinding.inflate(inflater, container, false)
+        _binding = FragmentAddDeckBinding.inflate(inflater, container, false)
         firestore = FirebaseFirestore.getInstance()
         return binding.root
     }
@@ -50,7 +50,10 @@ class AddFragment : Fragment() {
             .set(deck)
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Deck created", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.navigation_library)
+                val bundle = Bundle().apply {
+                    putParcelable("deck", deck)
+                }
+                findNavController().navigate(R.id.actionAddDeckFragmentToAddFlashcardFragment, bundle)
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error creating deck: ${e.message}", Toast.LENGTH_SHORT).show()

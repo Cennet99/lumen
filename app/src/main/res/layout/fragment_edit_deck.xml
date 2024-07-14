@@ -4,42 +4,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="deck"
-            type="com.cennetnadir.lumen.core.data.Deck" />
+        <!-- ViewModel oder andere Datenbindungen -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        tools:context=".feature.edit.EditDeckFragment">
 
-        <TextView
-            android:id="@+id/textViewDeckName"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFlashcards"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{deck.name}"
+            android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buttonAddFlashcard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            android:id="@+id/buttonEditDeck"
+            android:id="@+id/buttonAddFlashcard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit"
-            app:layout_constraintTop_toBottomOf="@id/textViewDeckName"
+            android:text="Add Flashcard"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-        <Button
-            android:id="@+id/buttonLearnDeck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Learn"
-            app:layout_constraintTop_toBottomOf="@id/textViewDeckName"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:layout_margin="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

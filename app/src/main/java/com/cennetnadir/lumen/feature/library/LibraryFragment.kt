@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.cennetnadir.lumen.R
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.FragmentLibraryBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.toObjects
 
 class LibraryFragment : Fragment() {
 
@@ -19,7 +19,6 @@ class LibraryFragment : Fragment() {
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var adapter: DeckAdapter
-    private var deckList: MutableList<Deck> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,24 +32,29 @@ class LibraryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = DeckAdapter(deckList)
-        binding.recyclerViewDecks.layoutManager = LinearLayoutManager(context)
-        binding.recyclerViewDecks.adapter = adapter
+        binding.recyclerViewDecks.layoutManager = LinearLayoutManager(requireContext())
 
-        fetchDecks()
-    }
-
-    private fun fetchDecks() {
         firestore.collection("decks")
             .get()
-            .addOnSuccessListener { result: QuerySnapshot ->
-                deckList.clear()
-                deckList.addAll(result.toObjects())
-                adapter.notifyDataSetChanged()
+            .addOnSuccessListener { result ->
+                val decks = result.toObjects(Deck::class.java)
+                adapter = DeckAdapter(decks, this::onEditClick, this::onLearnClick)
+                binding.recyclerViewDecks.adapter = adapter
             }
-            .addOnFailureListener { e ->
-                // Handle error
-            }
+    }
+
+    private fun onEditClick(deck: Deck) {
+        val bundle = Bundle().apply {
+            putParcelable("deck", deck)
+        }
+        findNavController().navigate(R.id.actionLibraryFragmentToEditDeckFragment, bundle)
+    }
+
+    private fun onLearnClick(deck: Deck) {
+        val bundle = Bundle().apply {
+            putParcelable("deck", deck)
+        }
+        findNavController().navigate(R.id.learnFragment, bundle)
     }
 
     override fun onDestroyView() {

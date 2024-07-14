@@ -1,10 +1,6 @@
 package com.cennetnadir.lumen.core.data
 
-import javax.inject.Inject
-import javax.inject.Singleton
-
-@Singleton
-class FlashcardRepositoryImpl @Inject constructor() : FlashcardRepository {
+class FlashcardRepositoryImpl : FlashcardRepository {
 
     private val flashcards = mutableListOf<Flashcard>()
     private val decks = mutableListOf<Deck>()

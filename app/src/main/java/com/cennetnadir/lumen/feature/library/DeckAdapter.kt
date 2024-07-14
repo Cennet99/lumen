@@ -1,31 +1,30 @@
 package com.cennetnadir.lumen.feature.library
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.cennetnadir.lumen.R
 import com.cennetnadir.lumen.core.data.Deck
+import com.cennetnadir.lumen.databinding.ItemDeckBinding
 
-class DeckAdapter(private val deckList: List<Deck>) : RecyclerView.Adapter<DeckAdapter.DeckViewHolder>() {
+class DeckAdapter(
+    private val decks: List<Deck>,
+    private val onEditClick: (Deck) -> Unit,
+    private val onLearnClick: (Deck) -> Unit
+) : RecyclerView.Adapter<DeckAdapter.DeckViewHolder>() {
+
+    inner class DeckViewHolder(val binding: ItemDeckBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeckViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_deck, parent, false)
-        return DeckViewHolder(view)
+        val binding = ItemDeckBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DeckViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DeckViewHolder, position: Int) {
-        holder.bind(deckList[position])
+        val deck = decks[position]
+        holder.binding.deck = deck
+        holder.binding.buttonEditDeck.setOnClickListener { onEditClick(deck) }
+        holder.binding.buttonLearnDeck.setOnClickListener { onLearnClick(deck) }
     }
 
-    override fun getItemCount(): Int = deckList.size
-
-    class DeckViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val deckNameTextView: TextView = itemView.findViewById(R.id.deck_name)
-
-        fun bind(deck: Deck) {
-            deckNameTextView.text = deck.name
-        }
-    }
+    override fun getItemCount(): Int = decks.size
 }
