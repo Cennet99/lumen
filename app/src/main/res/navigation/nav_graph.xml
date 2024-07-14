@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.cennetnadir.lumen.feature.home.HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_browse"
+        android:name="com.cennetnadir.lumen.feature.browse.BrowseFragment"
+        tools:layout="@layout/fragment_browse" />
+
+    <fragment
+        android:id="@+id/navigation_add"
+        android:name="com.cennetnadir.lumen.feature.add.AddFragment"
+        tools:layout="@layout/fragment_add">
+        <action
+            android:id="@+id/actionNavigationAddToNavigationLibrary"
+            app:destination="@id/navigation_library" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_library"
+        android:name="com.cennetnadir.lumen.feature.library.LibraryFragment"
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/actionNavigationLibraryToNavigationEditDeck"
+            app:destination="@+id/navigation_library" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.cennetnadir.lumen.feature.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

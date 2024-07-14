@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1080556014026",
+    "project_id": "lumen-68306",
+    "storage_bucket": "lumen-68306.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080556014026:android:38fb644bf64725bd9de733",
+        "android_client_info": {
+          "package_name": "com.cennetnadir.lumen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb3DdxewCJUZWRn3wnmNrVO_a0fxQVznw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

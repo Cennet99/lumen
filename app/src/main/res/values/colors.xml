@@ -1,0 +1,16 @@
+<resources>
+    <color name="primaryColor">#1A374D</color>
+    <color name="primaryDarkColor">#406882</color>
+    <color name="accentColor">#6998AB</color>
+    <color name="lightBlue">#ADD8E6</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorUnselected">#B0C4DE</color>
+    <color name="darkBackground">#303030</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="backgroundColor">#0A1C30</color>
+    <color name="buttonColor">#4A90E2</color>
+    <color name="colorPrimary">#0A1C30</color>
+    <color name="colorAccent">#315072</color>
+</resources>
