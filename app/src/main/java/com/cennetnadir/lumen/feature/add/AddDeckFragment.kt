@@ -53,7 +53,7 @@ class AddDeckFragment : Fragment() {
                 val bundle = Bundle().apply {
                     putParcelable("deck", deck)
                 }
-                findNavController().navigate(R.id.actionAddDeckFragmentToAddFlashcardFragment, bundle)
+                findNavController().navigate(R.id.action_addDeckFragment_to_addFlashcardFragment, bundle)
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error creating deck: ${e.message}", Toast.LENGTH_SHORT).show()

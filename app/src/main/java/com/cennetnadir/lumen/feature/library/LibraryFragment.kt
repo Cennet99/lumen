@@ -47,14 +47,14 @@ class LibraryFragment : Fragment() {
         val bundle = Bundle().apply {
             putParcelable("deck", deck)
         }
-        findNavController().navigate(R.id.actionLibraryFragmentToEditDeckFragment, bundle)
+        findNavController().navigate(R.id.action_libraryFragment_to_editDeckFragment, bundle)
     }
 
     private fun onLearnClick(deck: Deck) {
         val bundle = Bundle().apply {
             putParcelable("deck", deck)
         }
-        findNavController().navigate(R.id.learnFragment, bundle)
+        findNavController().navigate(R.id.action_libraryFragment_to_navigation_learn, bundle)
     }
 
     override fun onDestroyView() {

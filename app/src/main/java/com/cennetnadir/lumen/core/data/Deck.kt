@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class Deck(
     val id: String = "", // Default value for Firebase deserialization
     val name: String = "",
-    val flashcards: List<Flashcard> = emptyList()
+    var flashcards: List<Flashcard> = emptyList()
 ) : Parcelable

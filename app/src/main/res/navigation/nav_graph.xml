@@ -19,8 +19,8 @@
         android:name="com.cennetnadir.lumen.feature.add.AddDeckFragment"
         tools:layout="@layout/fragment_add_deck">
         <action
-            android:id="@+id/actionAddDeckFragmentToAddFlashcardFragment"
-            app:destination="@id/addFlashcardFragment" />
+            android:id="@+id/action_addDeckFragment_to_addFlashcardFragment"
+            app:destination="@id/navigation_add_flashcard" />
     </fragment>
 
     <fragment
@@ -28,42 +28,42 @@
         android:name="com.cennetnadir.lumen.feature.library.LibraryFragment"
         tools:layout="@layout/fragment_library">
         <action
-            android:id="@+id/actionLibraryFragmentToEditDeckFragment"
-            app:destination="@id/editDeckFragment" />
+            android:id="@+id/action_libraryFragment_to_editDeckFragment"
+            app:destination="@id/navigation_edit_deck" />
+        <action
+            android:id="@+id/action_libraryFragment_to_navigation_learn"
+            app:destination="@id/navigation_learn" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_deck"
+        android:name="com.cennetnadir.lumen.feature.edit.EditDeckFragment"
+        tools:layout="@layout/fragment_edit_deck">
+        <action
+            android:id="@+id/action_editDeckFragment_to_addFlashcardFragment"
+            app:destination="@id/navigation_add_flashcard" />
+        <action
+            android:id="@+id/action_editDeckFragment_to_editFlashcardFragment"
+            app:destination="@id/navigation_edit_flashcard" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_add_flashcard"
+        android:name="com.cennetnadir.lumen.feature.add.AddFlashcardFragment"
+        tools:layout="@layout/fragment_add_flashcard" />
+
+    <fragment
+        android:id="@+id/navigation_edit_flashcard"
+        android:name="com.cennetnadir.lumen.feature.library.EditFlashcardFragment"
+        tools:layout="@layout/fragment_edit_flashcard" />
+
+    <fragment
+        android:id="@+id/navigation_learn"
+        android:name="com.cennetnadir.lumen.feature.learn.LearnFragment"
+        tools:layout="@layout/fragment_learn" />
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.cennetnadir.lumen.feature.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
-
-    <fragment
-        android:id="@+id/addFlashcardFragment"
-        android:name="com.cennetnadir.lumen.feature.add.AddFlashcardFragment"
-        tools:layout="@layout/fragment_add_flashcard">
-        <argument
-            android:name="deck"
-            app:argType="com.cennetnadir.lumen.core.data.Deck" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/editDeckFragment"
-        android:name="com.cennetnadir.lumen.feature.edit.EditDeckFragment"
-        tools:layout="@layout/fragment_edit_deck">
-        <argument
-            android:name="deck"
-            app:argType="com.cennetnadir.lumen.core.data.Deck" />
-        <action
-            android:id="@+id/action_editDeckFragment_to_addFlashcardFragment"
-            app:destination="@id/addFlashcardFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/learnFragment"
-        android:name="com.cennetnadir.lumen.feature.learn.LearnFragment"
-        tools:layout="@layout/fragment_learn">
-        <argument
-            android:name="deck"
-            app:argType="com.cennetnadir.lumen.core.data.Deck" />
-    </fragment>
 </navigation>
