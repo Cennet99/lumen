@@ -5,19 +5,18 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 
-// Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontSize = 16.sp,
-        color = Color.White // Set the default font color to white
+        color = Color.White
     ),
     bodyMedium = TextStyle(
         fontSize = 14.sp,
-        color = Color.White // Set the default font color to white
+        color = Color.White
     ),
     bodySmall = TextStyle(
         fontSize = 12.sp,
-        color = Color.White // Set the default font color to white
+        color = Color.White
     )
     // You can override other text styles here as well
 )
