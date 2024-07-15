@@ -1,5 +1,6 @@
 package com.cennetnadir.lumen.feature.library
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +8,7 @@ import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.ItemDeckBinding
 
 class DeckAdapter(
-    private var decks: MutableList<Deck>,
+    private val decks: MutableList<Deck>,
     private val onEditClick: (Deck) -> Unit,
     private val onLearnClick: (Deck) -> Unit,
     private val onDeleteClick: (Deck) -> Unit
@@ -38,6 +39,7 @@ class DeckAdapter(
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateDecks(newDecks: List<Deck>) {
         decks.clear()
         decks.addAll(newDecks)
