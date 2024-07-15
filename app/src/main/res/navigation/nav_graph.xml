@@ -56,11 +56,14 @@
         android:id="@+id/navigation_edit_flashcard"
         android:name="com.cennetnadir.lumen.feature.library.EditFlashcardFragment"
         tools:layout="@layout/fragment_edit_flashcard" />
-
     <fragment
         android:id="@+id/navigation_learn"
         android:name="com.cennetnadir.lumen.feature.learn.LearnFragment"
-        tools:layout="@layout/fragment_learn" />
+        tools:layout="@layout/fragment_learn">
+        <action
+            android:id="@+id/action_learnFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"

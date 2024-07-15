@@ -38,7 +38,7 @@ class LibraryFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 val decks = result.toObjects(Deck::class.java)
-                adapter = DeckAdapter(decks, this::onEditClick, this::onLearnClick)
+                adapter = DeckAdapter(decks, this::onEditClick, this::onLearnClick, this::onDeleteClick)
                 binding.recyclerViewDecks.adapter = adapter
             }
     }
@@ -55,6 +55,19 @@ class LibraryFragment : Fragment() {
             putParcelable("deck", deck)
         }
         findNavController().navigate(R.id.action_libraryFragment_to_navigation_learn, bundle)
+    }
+
+    private fun onDeleteClick(deck: Deck) {
+        firestore.collection("decks").document(deck.id)
+            .delete()
+            .addOnSuccessListener {
+                // Refresh the list after deletion
+                 adapter.removeDeck(deck)
+                // adapter.notifyItemRemoved(adapter.decks.indexOf(deck))
+            }
+            .addOnFailureListener { e ->
+                // Handle the failure if needed
+            }
     }
 
     override fun onDestroyView() {

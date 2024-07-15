@@ -7,9 +7,10 @@ import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.ItemDeckBinding
 
 class DeckAdapter(
-    private val decks: List<Deck>,
+    private var decks: MutableList<Deck>,
     private val onEditClick: (Deck) -> Unit,
-    private val onLearnClick: (Deck) -> Unit
+    private val onLearnClick: (Deck) -> Unit,
+    private val onDeleteClick: (Deck) -> Unit
 ) : RecyclerView.Adapter<DeckAdapter.DeckViewHolder>() {
 
     inner class DeckViewHolder(val binding: ItemDeckBinding) : RecyclerView.ViewHolder(binding.root)
@@ -24,7 +25,22 @@ class DeckAdapter(
         holder.binding.deck = deck
         holder.binding.buttonEditDeck.setOnClickListener { onEditClick(deck) }
         holder.binding.buttonLearnDeck.setOnClickListener { onLearnClick(deck) }
+        holder.binding.buttonDeleteDeck.setOnClickListener { onDeleteClick(deck) }
     }
 
     override fun getItemCount(): Int = decks.size
+
+    fun removeDeck(deck: Deck) {
+        val position = decks.indexOf(deck)
+        if (position != -1) {
+            decks.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
+
+    fun updateDecks(newDecks: List<Deck>) {
+        decks.clear()
+        decks.addAll(newDecks)
+        notifyDataSetChanged()
+    }
 }
