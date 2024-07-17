@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.FragmentLibraryBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LibraryFragment : Fragment() {
@@ -19,6 +20,7 @@ class LibraryFragment : Fragment() {
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var adapter: DeckAdapter
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,7 @@ class LibraryFragment : Fragment() {
     ): View {
         _binding = FragmentLibraryBinding.inflate(inflater, container, false)
         firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
         return binding.root
     }
 
@@ -34,13 +37,17 @@ class LibraryFragment : Fragment() {
 
         binding.recyclerViewDecks.layoutManager = LinearLayoutManager(requireContext())
 
-        firestore.collection("decks")
-            .get()
-            .addOnSuccessListener { result ->
-                val decks = result.toObjects(Deck::class.java)
-                adapter = DeckAdapter(decks, this::onEditClick, this::onLearnClick, this::onDeleteClick)
-                binding.recyclerViewDecks.adapter = adapter
-            }
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            firestore.collection("decks")
+                .whereEqualTo("userId", currentUser.uid)
+                .get()
+                .addOnSuccessListener { result ->
+                    val decks = result.toObjects(Deck::class.java)
+                    adapter = DeckAdapter(decks.toMutableList(), this::onEditClick, this::onLearnClick, this::onDeleteClick)
+                    binding.recyclerViewDecks.adapter = adapter
+                }
+        }
     }
 
     private fun onEditClick(deck: Deck) {
@@ -62,8 +69,7 @@ class LibraryFragment : Fragment() {
             .delete()
             .addOnSuccessListener {
                 // Refresh the list after deletion
-                 adapter.removeDeck(deck)
-                // adapter.notifyItemRemoved(adapter.decks.indexOf(deck))
+                adapter.removeDeck(deck)
             }
             .addOnFailureListener { e ->
                 // Handle the failure if needed
