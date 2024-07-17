@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cennetnadir.lumen.R
 import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.FragmentBrowseBinding
-import com.cennetnadir.lumen.feature.library.DeckAdapter
+import com.cennetnadir.lumen.feature.browse.DeckAdapterBrowse
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BrowseFragment : Fragment() {
@@ -21,7 +21,7 @@ class BrowseFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var firestore: FirebaseFirestore
-    private lateinit var adapter: DeckAdapter
+    private lateinit var adapter: DeckAdapterBrowse
     private var allDecks: List<Deck> = listOf()
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ class BrowseFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 allDecks = result.toObjects(Deck::class.java)
-                adapter = DeckAdapter(allDecks.toMutableList(), this::onEditClick, this::onLearnClick, this::onDeleteClick)
+                adapter = DeckAdapterBrowse(allDecks.toMutableList(), this::onLearnClick)
                 binding.recyclerViewBrowseDecks.adapter = adapter
             }
 
@@ -64,30 +64,12 @@ class BrowseFragment : Fragment() {
         adapter.updateDecks(filteredDecks)
     }
 
-    private fun onEditClick(deck: Deck) {
-        val bundle = Bundle().apply {
-            putParcelable("deck", deck)
-        }
-        findNavController().navigate(R.id.action_browseFragment_to_editDeckFragment, bundle)
-    }
 
     private fun onLearnClick(deck: Deck) {
         val bundle = Bundle().apply {
             putParcelable("deck", deck)
         }
         findNavController().navigate(R.id.action_browseFragment_to_navigation_learn, bundle)
-    }
-
-    private fun onDeleteClick(deck: Deck) {
-        firestore.collection("decks").document(deck.id)
-            .delete()
-            .addOnSuccessListener {
-                // Refresh the list after deletion
-                adapter.removeDeck(deck)
-            }
-            .addOnFailureListener { e ->
-                // Handle the failure if needed
-            }
     }
 
     override fun onDestroyView() {
