@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cennetnadir.lumen.R
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cennetnadir.lumen.R
 import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.FragmentLibraryBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -36,18 +37,28 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerViewDecks.layoutManager = LinearLayoutManager(requireContext())
+        adapter = DeckAdapter(mutableListOf(), this::onEditClick, this::onLearnClick, this::onDeleteClick)
+        binding.recyclerViewDecks.adapter = adapter
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            firestore.collection("decks")
-                .whereEqualTo("userId", currentUser.uid)
-                .get()
-                .addOnSuccessListener { result ->
-                    val decks = result.toObjects(Deck::class.java)
-                    adapter = DeckAdapter(decks.toMutableList(), this::onEditClick, this::onLearnClick, this::onDeleteClick)
-                    binding.recyclerViewDecks.adapter = adapter
-                }
+            fetchDecks(currentUser.uid)
+        } else {
+            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun fetchDecks(userId: String) {
+        firestore.collection("decks")
+            .whereEqualTo("userId", userId)
+            .get()
+            .addOnSuccessListener { result ->
+                val decks = result.toObjects(Deck::class.java)
+                adapter.updateDecks(decks)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error fetching decks: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun onEditClick(deck: Deck) {
@@ -68,11 +79,10 @@ class LibraryFragment : Fragment() {
         firestore.collection("decks").document(deck.id)
             .delete()
             .addOnSuccessListener {
-                // Refresh the list after deletion
                 adapter.removeDeck(deck)
             }
             .addOnFailureListener { e ->
-                // Handle the failure if needed
+                Toast.makeText(requireContext(), "Error deleting deck: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 

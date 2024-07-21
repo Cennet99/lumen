@@ -6,13 +6,13 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cennetnadir.lumen.R
 import com.cennetnadir.lumen.core.data.Deck
 import com.cennetnadir.lumen.databinding.FragmentBrowseBinding
-import com.cennetnadir.lumen.feature.browse.DeckAdapterBrowse
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BrowseFragment : Fragment() {
@@ -37,14 +37,10 @@ class BrowseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerViewBrowseDecks.layoutManager = LinearLayoutManager(requireContext())
+        adapter = DeckAdapterBrowse(mutableListOf(), this::onLearnClick)
+        binding.recyclerViewBrowseDecks.adapter = adapter
 
-        firestore.collection("decks")
-            .get()
-            .addOnSuccessListener { result ->
-                allDecks = result.toObjects(Deck::class.java)
-                adapter = DeckAdapterBrowse(allDecks.toMutableList(), this::onLearnClick)
-                binding.recyclerViewBrowseDecks.adapter = adapter
-            }
+        fetchDecks()
 
         binding.editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -55,6 +51,18 @@ class BrowseFragment : Fragment() {
         })
     }
 
+    private fun fetchDecks() {
+        firestore.collection("decks")
+            .get()
+            .addOnSuccessListener { result ->
+                allDecks = result.toObjects(Deck::class.java)
+                adapter.updateDecks(allDecks)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error fetching decks: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun filterDecks(query: String) {
         val filteredDecks = if (query.isEmpty()) {
             allDecks
@@ -63,7 +71,6 @@ class BrowseFragment : Fragment() {
         }
         adapter.updateDecks(filteredDecks)
     }
-
 
     private fun onLearnClick(deck: Deck) {
         val bundle = Bundle().apply {

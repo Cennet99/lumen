@@ -27,7 +27,6 @@ class DeckAdapterBrowse(
 
     override fun getItemCount(): Int = decks.size
 
-
     @SuppressLint("NotifyDataSetChanged")
     fun updateDecks(newDecks: List<Deck>) {
         decks.clear()
