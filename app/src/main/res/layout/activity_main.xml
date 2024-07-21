@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".main.MainActivity">
 
+        <!-- Navigation host fragment for handling navigation between destinations -->
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -23,6 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Bottom navigation view for navigation between main sections -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="0dp"

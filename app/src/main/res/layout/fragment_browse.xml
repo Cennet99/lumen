@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.browse.BrowseFragment">
 
+        <!-- Input field for searching decks -->
         <EditText
             android:id="@+id/editTextSearch"
             android:layout_width="0dp"
@@ -24,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp" />
 
+        <!-- RecyclerView to display the list of decks -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewBrowseDecks"
             android:layout_width="0dp"

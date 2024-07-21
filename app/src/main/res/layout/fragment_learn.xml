@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.learn.LearnFragment">
 
+        <!-- Display the name of the deck being learned -->
         <TextView
             android:id="@+id/textViewDeckName"
             android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"/>
 
+        <!-- Display the current question -->
         <TextView
             android:id="@+id/textViewQuestion"
             android:layout_width="wrap_content"
@@ -36,6 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="32dp"/>
 
+        <!-- Display the answer (initially hidden) -->
         <TextView
             android:id="@+id/textViewAnswer"
             android:layout_width="wrap_content"
@@ -49,6 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"/>
 
+        <!-- Button to show the answer -->
         <Button
             android:id="@+id/buttonShowAnswer"
             android:layout_width="wrap_content"
@@ -59,6 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="32dp"/>
 
+        <!-- Button to mark the question as memorized (initially hidden) -->
         <Button
             android:id="@+id/buttonKnown"
             android:layout_width="wrap_content"
@@ -70,6 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"/>
 
+        <!-- Button to mark the question as not memorized (initially hidden) -->
         <Button
             android:id="@+id/buttonUnknown"
             android:layout_width="wrap_content"

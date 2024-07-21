@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.add.AddFlashcardFragment">
 
+        <!-- Input field for question text -->
         <EditText
             android:id="@+id/questionInput"
             android:layout_width="0dp"
@@ -25,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp" />
 
+        <!-- Input field for answer text -->
         <EditText
             android:id="@+id/answerInput"
             android:layout_width="0dp"
@@ -38,6 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp" />
 
+        <!-- Button to add the flashcard -->
         <Button
             android:id="@+id/buttonAddFlashcard"
             android:layout_width="wrap_content"
@@ -48,6 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
 
+        <!-- Button to indicate done with adding flashcards -->
         <Button
             android:id="@+id/buttonDone"
             android:layout_width="wrap_content"

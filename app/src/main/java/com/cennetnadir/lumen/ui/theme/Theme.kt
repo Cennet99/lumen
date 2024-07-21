@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.Color
 
+// Define a dark color scheme for the app
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
@@ -23,6 +24,7 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = Color.White
 )
 
+// Define a light color scheme for the app
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
@@ -34,23 +36,24 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color.White
 )
 
+// Composable function to apply the theme to the app
 @Composable
 fun LumenTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(), // Check if the system is in dark theme mode
+    dynamicColor: Boolean = true, // Enable dynamic colors on supported devices
+    content: @Composable () -> Unit // Content to be themed
 ) {
+    // Determine the color scheme to use based on system settings and dynamic color support
     val colorScheme = when {
         dynamicColor -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
 
+    // Apply the determined color scheme and typography to the MaterialTheme
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,

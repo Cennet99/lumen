@@ -16,13 +16,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class LibraryFragment : Fragment() {
 
+    // View binding instance to access layout views
     private var _binding: FragmentLibraryBinding? = null
     private val binding get() = _binding!!
-
+    // Firebase Firestore instance for database operations
     private lateinit var firestore: FirebaseFirestore
+    // Adapter for displaying the list of decks
     private lateinit var adapter: DeckAdapter
+    // Firebase Authentication instance for user authentication
     private lateinit var auth: FirebaseAuth
 
+    // Inflates the layout for this fragment using view binding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +37,7 @@ class LibraryFragment : Fragment() {
         return binding.root
     }
 
+    // Called after the view has been created
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,6 +45,7 @@ class LibraryFragment : Fragment() {
         adapter = DeckAdapter(mutableListOf(), this::onEditClick, this::onLearnClick, this::onDeleteClick)
         binding.recyclerViewDecks.adapter = adapter
 
+        // Fetch decks for the current user
         val currentUser = auth.currentUser
         if (currentUser != null) {
             fetchDecks(currentUser.uid)
@@ -48,6 +54,7 @@ class LibraryFragment : Fragment() {
         }
     }
 
+    // Fetch decks from Firestore for the given user ID
     private fun fetchDecks(userId: String) {
         firestore.collection("decks")
             .whereEqualTo("userId", userId)
@@ -61,6 +68,7 @@ class LibraryFragment : Fragment() {
             }
     }
 
+    // Navigate to edit deck screen
     private fun onEditClick(deck: Deck) {
         val bundle = Bundle().apply {
             putParcelable("deck", deck)
@@ -68,6 +76,7 @@ class LibraryFragment : Fragment() {
         findNavController().navigate(R.id.action_libraryFragment_to_editDeckFragment, bundle)
     }
 
+    // Navigate to learn deck screen
     private fun onLearnClick(deck: Deck) {
         val bundle = Bundle().apply {
             putParcelable("deck", deck)
@@ -75,6 +84,7 @@ class LibraryFragment : Fragment() {
         findNavController().navigate(R.id.action_libraryFragment_to_navigation_learn, bundle)
     }
 
+    // Delete a deck from Firestore
     private fun onDeleteClick(deck: Deck) {
         firestore.collection("decks").document(deck.id)
             .delete()
@@ -86,6 +96,7 @@ class LibraryFragment : Fragment() {
             }
     }
 
+    // Clear the binding when the view is destroyed to avoid memory leaks
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.library.EditFlashcardFragment">
 
+        <!-- Input field for the flashcard question -->
         <EditText
             android:id="@+id/editTextQuestion"
             android:layout_width="0dp"
@@ -24,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp" />
 
+        <!-- Input field for the flashcard answer -->
         <EditText
             android:id="@+id/editTextAnswer"
             android:layout_width="0dp"
@@ -36,6 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp" />
 
+        <!-- Button to save the edited flashcard -->
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"

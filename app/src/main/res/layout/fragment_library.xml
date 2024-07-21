@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.library.LibraryFragment">
 
+        <!-- RecyclerView to display the list of decks -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDecks"
             android:layout_width="match_parent"

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.add.AddDeckFragment">
 
+        <!-- Input field for deck name -->
         <EditText
             android:id="@+id/deckNameInput"
             android:layout_width="0dp"
@@ -25,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp" />
 
+        <!-- Button to create a new deck -->
         <Button
             android:id="@+id/buttonCreateDeck"
             android:layout_width="wrap_content"

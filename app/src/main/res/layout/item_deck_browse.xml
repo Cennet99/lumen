@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
+        <!-- Data binding variable for the deck object -->
         <variable
             name="deck"
             type="com.cennetnadir.lumen.core.data.Deck" />
@@ -11,6 +13,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Display the deck name -->
         <TextView
             android:id="@+id/deckName"
             android:layout_width="wrap_content"
@@ -19,6 +22,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <!-- Button to learn the deck -->
         <Button
             android:id="@+id/buttonLearnDeck"
             android:layout_width="wrap_content"

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <!-- Data binding variable for the deck object -->
         <variable
             name="deck"
             type="com.cennetnadir.lumen.core.data.Deck" />
@@ -14,6 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <!-- Display the deck name -->
         <TextView
             android:id="@+id/textViewDeckName"
             android:layout_width="0dp"
@@ -23,6 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Button to edit the deck -->
         <Button
             android:id="@+id/buttonEditDeck"
             android:layout_width="wrap_content"
@@ -32,6 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp" />
 
+        <!-- Button to learn the deck -->
         <Button
             android:id="@+id/buttonLearnDeck"
             android:layout_width="wrap_content"
@@ -41,6 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp" />
 
+        <!-- Button to delete the deck -->
         <Button
             android:id="@+id/buttonDeleteDeck"
             android:layout_width="wrap_content"

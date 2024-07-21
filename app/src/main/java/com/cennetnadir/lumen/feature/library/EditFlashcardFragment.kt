@@ -14,12 +14,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class EditFlashcardFragment : Fragment() {
 
+    // View binding instance to access layout views
     private var _binding: FragmentEditFlashcardBinding? = null
     private val binding get() = _binding!!
+    // Firebase Firestore instance for database operations
     private lateinit var firestore: FirebaseFirestore
+    // Flashcard instance to hold the flashcard data
     private lateinit var flashcard: Flashcard
+    // ID of the deck containing the flashcard
     private var deckId: String? = null
 
+    // Inflates the layout for this fragment using view binding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,26 +34,32 @@ class EditFlashcardFragment : Fragment() {
         return binding.root
     }
 
+    // Called after the view has been created
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Retrieve the flashcard and deck ID passed as arguments
         flashcard = arguments?.getParcelable("flashcard") ?: return
         deckId = arguments?.getString("deckId")
 
+        // Set the flashcard data in the input fields
         binding.editTextQuestion.setText(flashcard.question)
         binding.editTextAnswer.setText(flashcard.answer)
 
+        // Set click listener to save the updated flashcard
         binding.buttonSave.setOnClickListener {
             saveFlashcard()
         }
     }
 
+    // Save the updated flashcard to Firestore
     private fun saveFlashcard() {
         val updatedFlashcard = flashcard.copy(
             question = binding.editTextQuestion.text.toString(),
             answer = binding.editTextAnswer.text.toString()
         )
 
+        // Update the flashcard in Firestore
         deckId?.let { id ->
             firestore.collection("decks").document(id)
                 .update("flashcards", FieldValue.arrayRemove(flashcard))
@@ -69,6 +80,7 @@ class EditFlashcardFragment : Fragment() {
         }
     }
 
+    // Clear the binding when the view is destroyed to avoid memory leaks
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

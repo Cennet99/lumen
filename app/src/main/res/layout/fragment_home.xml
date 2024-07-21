@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- ViewModel or other data bindings -->
+        <!-- Define ViewModel or other data bindings here if needed -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".feature.home.HomeFragment">
 
-        <!-- Hintergrundbild -->
+        <!-- Background image for the home screen -->
         <ImageView
             android:id="@+id/backgroundImage"
             android:layout_width="match_parent"
@@ -20,7 +20,6 @@
             android:scaleType="centerCrop"
             android:src="@drawable/background_image"
             android:contentDescription="@string/app_name" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
