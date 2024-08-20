@@ -68,19 +68,30 @@
         android:name="com.cennetnadir.lumen.feature.library.EditFlashcardFragment"
         tools:layout="@layout/fragment_edit_flashcard" />
 
-    <!-- Learn fragment destination with navigation to Home fragment -->
+    <!-- Learn fragment destination with navigation to Congrats fragment -->
     <fragment
         android:id="@+id/navigation_learn"
         android:name="com.cennetnadir.lumen.feature.learn.LearnFragment"
         tools:layout="@layout/fragment_learn">
         <action
-            android:id="@+id/action_learnFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            android:id="@+id/action_learnFragment_to_navigation_congrats"
+            app:destination="@id/navigation_congrats" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_congrats"
+        android:name="com.cennetnadir.lumen.feature.learn.CongratsFragment"
+        tools:layout="@layout/fragment_congrats">
+        <action
+            android:id="@+id/action_congratsFragment_to_navigation_library"
+            app:destination="@id/navigation_library" />
+    </fragment>
+
 
     <!-- Settings fragment destination -->
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.cennetnadir.lumen.feature.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
+
 </navigation>

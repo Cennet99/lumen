@@ -4,36 +4,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!-- Define ViewModel or other data bindings here if needed -->
+        <!-- ViewModel or other data bindings -->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.settings.SettingsFragment">
+        tools:context=".feature.learn.CongratsFragment">
 
-        <!-- Logout Button -->
-        <Button
-            android:id="@+id/buttonLogout"
+        <!-- Congratulations Message -->
+        <TextView
+            android:id="@+id/textViewCongrats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="Congratulations! You have mastered all the flashcards in this deck!"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            tools:ignore="MissingConstraints" />
+            android:layout_marginTop="32dp"/>
 
-        <!-- Reset Password Button -->
+        <!-- Button to return to the library -->
         <Button
-            android:id="@+id/buttonResetPassword"
+            android:id="@+id/buttonReturnToLibrary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset Password"
-            app:layout_constraintTop_toBottomOf="@id/buttonLogout"
+            android:text="Return to Library"
+            app:layout_constraintTop_toBottomOf="@id/textViewCongrats"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

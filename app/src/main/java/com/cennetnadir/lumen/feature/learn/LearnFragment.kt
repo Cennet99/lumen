@@ -80,7 +80,7 @@ class LearnFragment : Fragment() {
         // If all flashcards have been reviewed, navigate back to home
         if (remainingFlashcards.isEmpty()) {
             if (flashcards.isEmpty()) {
-                findNavController().navigate(R.id.action_learnFragment_to_navigation_home)
+                findNavController().navigate(R.id.action_learnFragment_to_navigation_congrats)
             } else {
                 remainingFlashcards = flashcards.toMutableList()
             }
